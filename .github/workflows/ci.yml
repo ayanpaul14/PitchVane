@@ -1,0 +1,74 @@
+name: 🚀 PitchVane CI — Lint & Build
+
+on:
+  push:
+    branches: [main, "feature/**", "chore/**", "docs/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Frontend: Lint + Production Build ─────────────────────────
+  frontend-build:
+    name: 🖥️ Frontend — Lint & Vite Build
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: ⬇️ Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 📦 Install frontend dependencies
+        run: npm ci
+
+      - name: 🔍 Run ESLint
+        run: npm run lint
+
+      - name: 🏗️ Build production bundle
+        run: npm run build
+        env:
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+
+      - name: ✅ Report bundle size
+        run: |
+          echo "--- Frontend Build Complete ---"
+          du -sh dist/
+          ls -lh dist/assets/
+
+  # ── Backend: Dependency Audit ──────────────────────────────────
+  backend-audit:
+    name: 🔒 Backend — Dependency Audit
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: ⬇️ Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+
+      - name: 📦 Install backend dependencies
+        run: npm ci
+
+      - name: 🛡️ Run npm audit (non-blocking)
+        run: npm audit --audit-level=high || true
+
+      - name: ✅ Backend dependencies ready
+        run: echo "Backend dependency check complete!"
