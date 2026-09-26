@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pitchvane — Autonomous Institutional Diligence Platform</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim conforming to Design System -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#c3c6d3",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed": "#181b25",
+            "surface-container-high": "#dce9ff",
+            "surface-container": "#e5eeff",
+            "secondary-fixed-dim": "#93ccff",
+            "surface-variant": "#d3e4fe",
+            "tertiary-fixed": "#85f8c4",
+            "primary": "#090d16",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#005137",
+            "on-error-container": "#93000a",
+            "outline": "#76777c",
+            "inverse-surface": "#213145",
+            "secondary-fixed": "#cce5ff",
+            "on-background": "#0b1c30",
+            "background": "#f8f9ff",
+            "tertiary": "#000000",
+            "secondary-container": "#5bb8fe",
+            "on-error": "#ffffff",
+            "surface-tint": "#5a5e69",
+            "primary-fixed": "#dfe2ef",
+            "primary-fixed-dim": "#c3c6d3",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-low": "#eff4ff",
+            "on-secondary-fixed-variant": "#004b73",
+            "outline-variant": "#c6c6cc",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#00476e",
+            "on-tertiary-fixed": "#002114",
+            "surface": "#f8f9ff",
+            "on-surface": "#0b1c30",
+            "on-surface-variant": "#45464b",
+            "on-secondary-fixed": "#001d31",
+            "secondary": "#006398",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#002114",
+            "on-primary-container": "#808390",
+            "tertiary-fixed-dim": "#68dba9",
+            "surface-container-highest": "#d3e4fe",
+            "surface-dim": "#cbdbf5",
+            "surface-bright": "#f8f9ff",
+            "error": "#ba1a1a",
+            "on-tertiary-container": "#069669",
+            "error-container": "#ffdad6",
+            "on-primary-fixed-variant": "#434751",
+            "primary-container": "#181b25",
+            "brand-cobalt": "#2563eb",
+            "brand-cyan": "#0284c7",
+            "audit-emerald": "#059669"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "margin-screen": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem",
+            "space-sm": "0.5rem",
+            "space-base": "1rem",
+            "space-xl": "2rem",
+            "space-2xs": "0.125rem",
+            "gutter-terminal": "0.75rem",
+            "space-2xl": "3rem"
+          },
+          "fontFamily": {
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "telemetry-md": ["JetBrains Mono"],
+            "telemetry-sm": ["JetBrains Mono"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "telemetry-lg": ["JetBrains Mono"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .bg-grid-subtle {
+      background-size: 24px 24px;
+      background-image: 
+        radial-gradient(circle, #cbd5e1 0.8px, transparent 0.8px);
+    }
+    .institutional-card-shadow {
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.02);
+    }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-[#090d16] font-body-md antialiased min-h-screen flex flex-col justify-between selection:bg-[#2563eb] selection:text-white">
+<!-- Executive Institutional Navigation Header -->
+<header class="sticky top-0 z-50 bg-white/95 border-b border-slate-200 backdrop-blur-md"><div class="flex justify-between items-center w-full px-6 max-w-7xl mx-auto h-16">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2.5 group" href="#">
+<div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 via-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/25 transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[20px]" data-icon="hub">hub</span>
+</div>
+<span class="font-headline-lg text-[21px] font-extrabold text-[#090d16] tracking-tight flex items-center">
+Pitchvane<span class="ml-1 w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
+</span>
+</a>
+<div class="hidden sm:flex items-center px-3 py-1 rounded-full bg-slate-900/5 border border-indigo-200/60 text-[11px] font-telemetry-sm text-slate-700 shadow-2xs">
+<span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 shadow-[0_0_8px_#10b981] animate-pulse"></span>
+<span class="font-semibold text-slate-800">LangGraph v2.4</span>
+<span class="ml-1 text-cyan-600 font-mono">• Active</span>
+</div>
+</div>
+<nav class="hidden md:flex items-center space-x-7 text-[13px] font-medium text-slate-600">
+<a class="text-indigo-600 font-semibold border-b-2 border-indigo-600 pb-0.5 flex items-center gap-1.5" href="#warroom">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping"></span> Live War Room
+</a>
+<a class="hover:text-indigo-600 transition-colors" href="#dealflow">Deal Flow</a>
+<a class="hover:text-indigo-600 transition-colors" href="#dossiers">Dossiers</a>
+<a class="hover:text-indigo-600 transition-colors" href="#studio">Studio</a>
+<a class="hover:text-indigo-600 transition-colors" href="#docs">API Docs</a>
+</nav>
+<div class="flex items-center space-x-3">
+<div class="hidden lg:flex items-center bg-slate-50/80 border border-slate-200/80 rounded-lg px-3 py-1.5 text-slate-400 focus-within:border-indigo-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-indigo-500/20 transition-all shadow-2xs">
+<span class="material-symbols-outlined text-[16px] mr-2 text-indigo-500" data-icon="search">search</span>
+<input class="bg-transparent border-none p-0 text-[13px] text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-0 w-44" placeholder="Search startups, memos..." type="text"/>
+<kbd class="ml-2 font-telemetry-sm text-[10px] bg-white px-1.5 py-0.5 rounded text-indigo-600 border border-slate-200 font-bold shadow-2xs">[Ctrl+K]</kbd>
+</div>
+<button class="p-2 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 rounded-lg transition-colors relative border border-transparent hover:border-indigo-100" title="Notifications">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-gradient-to-r from-rose-500 to-amber-500 rounded-full ring-2 ring-white"></span>
+</button>
+<a class="btn-gradient-glow inline-flex items-center justify-center text-white text-[12px] font-bold px-4 py-2.5 rounded-lg transition-all tracking-wide uppercase shadow-sm" href="#demo">
+<span class="material-symbols-outlined text-[16px] mr-1.5 text-cyan-300" data-icon="rocket_launch">rocket_launch</span> Launch Pipeline
+</a>
+</div>
+</div></header>
+<!-- Main Hero & Platform Canvas -->
+<main class="relative z-10 flex-grow w-full max-w-7xl mx-auto px-6 py-10 space-y-16">
+<!-- HERO SECTION: Institutional Editorial Layout -->
+<section class="relative overflow-hidden pt-6 pb-4 flex flex-col items-center text-center rounded-2xl">
+<!-- 3D Cyber-Chroma Constellation Scene as Ambient Background -->
+<!-- STITCH_THREEJS_START:ANIMATION_19 class="absolute inset-0 w-full h-full pointer-events-auto bg-transparent opacity-85" -->
+<div class="absolute inset-0 w-full h-full pointer-events-auto bg-transparent opacity-85" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_19" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_19');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const width = container.clientWidth || window.innerWidth || 800;
+const height = container.clientHeight || 500;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
+camera.position.set(0, 0, 18);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Vibrant Cyber-Chroma Ambient & Directional Lighting
+const ambientLight = new THREE.AmbientLight(0x051424, 1.8);
+scene.add(ambientLight);
+
+// Primary Cyan Light
+const cyanLight = new THREE.DirectionalLight(0x00f0ff, 2.5);
+cyanLight.position.set(12, 14, 10);
+scene.add(cyanLight);
+
+// Ultraviolet Light
+const violetLight = new THREE.PointLight(0x8b5cf6, 3.2, 40);
+violetLight.position.set(-10, 8, 8);
+scene.add(violetLight);
+
+// Emerald Telemetry Light
+const emeraldLight = new THREE.PointLight(0x10b981, 2.8, 35);
+emeraldLight.position.set(6, -10, 6);
+scene.add(emeraldLight);
+
+// Sunburst Amber Accent Light
+const amberLight = new THREE.PointLight(0xf59e0b, 2.2, 30);
+amberLight.position.set(-8, -6, 5);
+scene.add(amberLight);
+
+// Root Group
+const rootGroup = new THREE.Group();
+scene.add(rootGroup);
+
+// 1. Central Prismatic Diligence Core (Vibrant Multi-faceted Crystal)
+const coreGeo = new THREE.OctahedronGeometry(1.9, 0);
+const coreMat = new THREE.MeshPhongMaterial({
+  color: 0x03182d,
+  emissive: 0x0284c7,
+  emissiveIntensity: 0.5,
+  shininess: 90,
+  flatShading: true,
+  transparent: true,
+  opacity: 0.85
+});
+const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+rootGroup.add(coreMesh);
+
+// Outer Cyan-Violet Wireframe Lattice
+const wireGeo = new THREE.IcosahedronGeometry(2.5, 1);
+const wireMat = new THREE.MeshBasicMaterial({
+  color: 0x00f0ff,
+  wireframe: true,
+  transparent: true,
+  opacity: 0.4
+});
+const wireMesh = new THREE.Mesh(wireGeo, wireMat);
+rootGroup.add(wireMesh);
+
+// Inner Pulsing Octahedron Wireframe
+const innerWireGeo = new THREE.OctahedronGeometry(1.95, 0);
+const innerWireMat = new THREE.MeshBasicMaterial({
+  color: 0x8b5cf6,
+  wireframe: true,
+  transparent: true,
+  opacity: 0.6
+});
+const innerWire = new THREE.Mesh(innerWireGeo, innerWireMat);
+rootGroup.add(innerWire);
+
+// 2. Multi-axial Chromatic Gimbal Rings (LangGraph Orchestration Orbits)
+const ringConfigs = [
+  { radius: 4.6, tube: 0.022, color: 0x00f0ff, opacity: 0.45, rx: Math.PI / 3.2, ry: 0 },
+  { radius: 6.2, tube: 0.018, color: 0x8b5cf6, opacity: 0.4, rx: -Math.PI / 4, ry: Math.PI / 5 },
+  { radius: 7.8, tube: 0.015, color: 0x10b981, opacity: 0.35, rx: Math.PI / 5.5, ry: -Math.PI / 3 },
+  { radius: 9.4, tube: 0.012, color: 0xf59e0b, opacity: 0.25, rx: -Math.PI / 6, ry: Math.PI / 4 }
+];
+
+const rings = [];
+ringConfigs.forEach(cfg => {
+  const rGeo = new THREE.TorusGeometry(cfg.radius, cfg.tube, 16, 120);
+  const rMat = new THREE.MeshBasicMaterial({
+    color: cfg.color,
+    transparent: true,
+    opacity: cfg.opacity
+  });
+  const ring = new THREE.Mesh(rGeo, rMat);
+  ring.rotation.x = cfg.rx;
+  ring.rotation.y = cfg.ry;
+  rootGroup.add(ring);
+  rings.push(ring);
+});
+
+// 3. 4 Specialist Autonomous Agent Nodes matching Cyber-Chroma Theme colors:
+// Agent 01: Cyan (#00f0ff - Market)
+// Agent 02: Ultraviolet (#8b5cf6 - Competitor)
+// Agent 03: Amber (#f59e0b - Financial)
+// Agent 04: Emerald (#10b981 - Risk)
+const agentColors = [0x00f0ff, 0x8b5cf6, 0xf59e0b, 0x10b981];
+const satellites = [];
+
+agentColors.forEach((col, idx) => {
+  const satGroup = new THREE.Group();
+  
+  // Prismatic Diamond Satellite
+  const satGeo = new THREE.OctahedronGeometry(0.38, 0);
+  const satMat = new THREE.MeshPhongMaterial({
+    color: col,
+    emissive: col,
+    emissiveIntensity: 0.65,
+    shininess: 90,
+    flatShading: true
+  });
+  const satMesh = new THREE.Mesh(satGeo, satMat);
+  satGroup.add(satMesh);
+
+  // Radar Target Halo
+  const haloGeo = new THREE.RingGeometry(0.55, 0.65, 32);
+  const haloMat = new THREE.MeshBasicMaterial({
+    color: col,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: 0.55
+  });
+  const haloMesh = new THREE.Mesh(haloGeo, haloMat);
+  satGroup.add(haloMesh);
+
+  // Subtle Outer Pulsing Target Ping
+  const pingGeo = new THREE.RingGeometry(0.8, 0.85, 24);
+  const pingMat = new THREE.MeshBasicMaterial({
+    color: col,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: 0.25
+  });
+  const pingMesh = new THREE.Mesh(pingGeo, pingMat);
+  satGroup.add(pingMesh);
+
+  rootGroup.add(satGroup);
+  satellites.push({
+    group: satGroup,
+    satMesh,
+    haloMesh,
+    pingMesh,
+    angle: (idx * Math.PI) / 2,
+    radius: 5.4 + (idx % 2) * 1.2,
+    speed: 0.008 + idx * 0.002,
+    yOffset: (idx % 2 === 0 ? 1.0 : -1.0)
+  });
+});
+
+// 4. Vibrant Knowledge Vector Point Cloud (Chroma Vector Topologies)
+const particleCount = 260;
+const pGeo = new THREE.BufferGeometry();
+const pPos = new Float32Array(particleCount * 3);
+const pColors = new Float32Array(particleCount * 3);
+
+const palette = [
+  new THREE.Color(0x00f0ff), // Cyan
+  new THREE.Color(0x8b5cf6), // Violet
+  new THREE.Color(0x10b981), // Emerald
+  new THREE.Color(0xf59e0b)  // Amber
+];
+
+for (let i = 0; i < particleCount; i++) {
+  const r = 3.5 + Math.random() * 8.5;
+  const theta = Math.random() * Math.PI * 2;
+  const phi = Math.acos(Math.random() * 2 - 1);
+
+  pPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+  pPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.75;
+  pPos[i * 3 + 2] = r * Math.cos(phi);
+
+  const col = palette[Math.floor(Math.random() * palette.length)];
+  pColors[i * 3] = col.r;
+  pColors[i * 3 + 1] = col.g;
+  pColors[i * 3 + 2] = col.b;
+}
+
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+pGeo.setAttribute('color', new THREE.BufferAttribute(pColors, 3));
+
+const pMat = new THREE.PointsMaterial({
+  size: 0.13,
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.65
+});
+const particles = new THREE.Points(pGeo, pMat);
+rootGroup.add(particles);
+
+// Mouse Interaction & Parallax
+let mouseX = 0;
+let mouseY = 0;
+let targetX = 0;
+let targetY = 0;
+
+const onMouseMove = (e) => {
+  const rect = container.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width * 2 - 1;
+  const y = -((e.clientY - rect.top) / rect.height * 2 - 1);
+  targetX = x * 0.22;
+  targetY = y * 0.15;
+};
+window.addEventListener('mousemove', onMouseMove);
+
+const onResize = () => {
+  const w = container.clientWidth || window.innerWidth || 800;
+  const h = container.clientHeight || 500;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+};
+window.addEventListener('resize', onResize);
+
+// Animation Loop
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const elapsedTime = clock.getElapsedTime();
+
+  // Smooth lerp mouse parallax
+  mouseX += (targetX - mouseX) * 0.05;
+  mouseY += (targetY - mouseY) * 0.05;
+
+  rootGroup.rotation.y = elapsedTime * 0.07 + mouseX;
+  rootGroup.rotation.x = Math.sin(elapsedTime * 0.05) * 0.04 - mouseY;
+
+  // Gentle central core pulsation
+  const pulse = 1 + Math.sin(elapsedTime * 1.8) * 0.035;
+  coreMesh.scale.set(pulse, pulse, pulse);
+  wireMesh.rotation.y -= 0.003;
+  wireMesh.rotation.x += 0.0015;
+  innerWire.rotation.y += 0.004;
+
+  // Orbiting Specialist Agent Satellites
+  satellites.forEach(sat => {
+    sat.angle += sat.speed;
+    const x = Math.cos(sat.angle) * sat.radius;
+    const z = Math.sin(sat.angle) * sat.radius;
+    const y = Math.sin(sat.angle * 2) * 0.5 + sat.yOffset;
+    sat.group.position.set(x, y, z);
+    sat.satMesh.rotation.x += 0.02;
+    sat.satMesh.rotation.y += 0.025;
+    sat.haloMesh.rotation.z += 0.015;
+    const pingScale = 1 + Math.sin(elapsedTime * 3 + sat.radius) * 0.2;
+    sat.pingMesh.scale.set(pingScale, pingScale, pingScale);
+  });
+
+  // Orbital rings subtle differential spin
+  rings.forEach((r, i) => {
+    r.rotation.z += 0.0012 * (i % 2 === 0 ? 1 : -1);
+  });
+
+  // Knowledge vector point cloud drift
+  particles.rotation.y = -elapsedTime * 0.02;
+
+  renderer.render(scene, camera);
+}
+
+animate();
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_19 -->
+<div class="absolute inset-0 -top-10 hero-glow pointer-events-none -z-10 h-[650px] w-full"></div>
+<!-- Futuristic Status Pill with Neon Border & Pulsing Badge -->
+<div class="relative z-10 inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-indigo-200 shadow-sm shadow-indigo-100/50 mb-6">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+</span>
+<span class="font-telemetry-sm text-[11px] font-bold tracking-wider uppercase text-slate-800">
+● 3D Cyber-Chroma Constellation Active <span class="text-indigo-600">//</span> <span class="text-slate-800">LangGraph v2.4</span> <span class="text-indigo-600">//</span> <span class="text-cyan-600">4 Parallel Agents</span>
+</span>
+</div>
+<!-- Hero Main Headline with Triple Vibrant Gradient -->
+<div class="relative z-10 max-w-4xl mx-auto space-y-4">
+<h1 class="font-display-lg text-4xl sm:text-5xl md:text-[58px] md:leading-[1.12] font-extrabold text-slate-900 tracking-tight">
+Autonomous Startup Diligence in <br class="hidden md:block"/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-indigo-600 to-violet-600 drop-shadow-sm">120 Seconds Flat</span>
+</h1>
+<p class="font-body-lg text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+LangGraph-orchestrated multi-agent research across private vector RAG and real-time web telemetry to synthesize institutional investment committee memos.
+</p>
+</div>
+<!-- Executive Action Row with Vibrant Primary and Sleek Secondary Buttons -->
+<div class="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto pt-6 pb-4">
+<a class="w-full sm:w-auto btn-gradient-glow inline-flex items-center justify-center space-x-2 text-white font-bold text-[13px] px-7 py-3.5 rounded-lg transition-all tracking-wide uppercase" href="#live-case">
+<span class="material-symbols-outlined text-[19px] text-cyan-200" data-icon="play_arrow">play_arrow</span>
+<span>Start Live Diligence Case</span>
+</a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-white hover:bg-slate-50 border-2 border-indigo-100 hover:border-indigo-300 text-slate-800 font-bold text-[13px] px-6 py-3.5 rounded-lg transition-all shadow-sm hover:shadow-indigo-100" href="#dossier-preview">
+<span class="material-symbols-outlined text-[19px] text-indigo-600" data-icon="description">description</span>
+<span>Browse Sample Dossier (XID)</span>
+</a>
+</div>
+<!-- Trust Badges with Colored Icons & Badges -->
+<div class="relative z-10 flex flex-wrap items-center justify-center gap-5 pt-2 pb-6 text-[12px] font-semibold text-slate-600">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200/70">
+<span class="material-symbols-outlined text-[16px] text-emerald-600" data-icon="verified_user">verified_user</span>
+SOC2 Type II Certified
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cyan-50 text-cyan-800 border border-cyan-200/70">
+<span class="material-symbols-outlined text-[16px] text-cyan-600" data-icon="lock">lock</span>
+Zero Data Retention
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-violet-50 text-violet-800 border border-violet-200/70">
+<span class="material-symbols-outlined text-[16px] text-violet-600" data-icon="layers">layers</span>
+Chroma Private Shards
+</span>
+</div>
+<!-- 4 Key Metric Tiles: Elevated with Neon Top Borders, Iridescent Accents & Vibrant Badges -->
+<div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-5xl mt-4 text-left">
+<!-- Card 1: Execution Speed (Electric Cyan) -->
+<div class="p-5 bg-white/95 backdrop-blur-sm border border-slate-200/90 rounded-xl shadow-sm hover:border-cyan-400 hover:shadow-cyan-100/50 hover:shadow-lg transition-all relative overflow-hidden group">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+<div class="flex items-center justify-between pb-2">
+<span class="font-telemetry-sm text-[11px] font-bold text-slate-500 uppercase tracking-wider">Execution Speed</span>
+<div class="w-7 h-7 rounded-md bg-cyan-50 border border-cyan-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-cyan-600" data-icon="timer">timer</span>
+</div>
+</div>
+<div class="font-headline-md text-3xl font-extrabold text-slate-900 tracking-tight">118.4s</div>
+<div class="text-[12px] text-slate-600 mt-1 flex items-center gap-1.5 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+Full 18-page verdict memo
+</div>
+</div>
+<!-- Card 2: Vector Grounding (Emerald Mint) -->
+<div class="p-5 bg-white/95 backdrop-blur-sm border border-slate-200/90 rounded-xl shadow-sm hover:border-emerald-400 hover:shadow-emerald-100/50 hover:shadow-lg transition-all relative overflow-hidden group">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
+<div class="flex items-center justify-between pb-2">
+<span class="font-telemetry-sm text-[11px] font-bold text-slate-500 uppercase tracking-wider">Vector Grounding</span>
+<div class="w-7 h-7 rounded-md bg-emerald-50 border border-emerald-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-emerald-600" data-icon="memory">memory</span>
+</div>
+</div>
+<div class="font-headline-md text-3xl font-extrabold text-emerald-600 tracking-tight">100%</div>
+<div class="text-[12px] text-slate-500 mt-1 font-telemetry-sm font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded w-fit">
+Chroma Cosine Sim &gt; 0.82
+</div>
+</div>
+<!-- Card 3: Discrepancy Engine (Neon Amber / Sunset) -->
+<div class="p-5 bg-white/95 backdrop-blur-sm border border-slate-200/90 rounded-xl shadow-sm hover:border-amber-400 hover:shadow-amber-100/50 hover:shadow-lg transition-all relative overflow-hidden group">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-rose-500"></div>
+<div class="flex items-center justify-between pb-2">
+<span class="font-telemetry-sm text-[11px] font-bold text-slate-500 uppercase tracking-wider">Discrepancy Engine</span>
+<div class="w-7 h-7 rounded-md bg-amber-50 border border-amber-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-amber-600" data-icon="compare_arrows">compare_arrows</span>
+</div>
+</div>
+<div class="font-headline-md text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-rose-600 tracking-tight">Dual-Pass</div>
+<div class="text-[12px] text-slate-600 mt-1 font-medium">Cross-agent contradiction test</div>
+</div>
+<!-- Card 4: Live Web Grounding (Electric Ultraviolet / Indigo) -->
+<div class="p-5 bg-white/95 backdrop-blur-sm border border-slate-200/90 rounded-xl shadow-sm hover:border-violet-400 hover:shadow-violet-100/50 hover:shadow-lg transition-all relative overflow-hidden group">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-violet-600"></div>
+<div class="flex items-center justify-between pb-2">
+<span class="font-telemetry-sm text-[11px] font-bold text-slate-500 uppercase tracking-wider">Live Web Grounding</span>
+<div class="w-7 h-7 rounded-md bg-violet-50 border border-violet-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-violet-600" data-icon="language">language</span>
+</div>
+</div>
+<div class="font-headline-md text-3xl font-extrabold text-indigo-700 tracking-tight">Tavily API</div>
+<div class="text-[12px] text-slate-600 mt-1 font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span> Zero synthetic hallucinations
+</div>
+</div>
+</div></section>
+<!-- SYSTEM ARCHITECTURE PIPELINE -->
+<section class="space-y-4"><div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-3">
+<div>
+<div class="font-telemetry-sm text-[11px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-indigo-600 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded bg-indigo-600"></span> Architecture // V2.4
+</div>
+<h2 class="font-headline-lg text-2xl font-bold text-slate-900 tracking-tight">Deterministic Orchestration Graph</h2>
+</div>
+<div class="text-sm font-telemetry-sm text-slate-600 mt-2 md:mt-0 flex items-center space-x-2 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse"></span>
+<span class="font-semibold text-emerald-800">WebSocket Stream Protocol (Socket.IO bi-directional bus)</span>
+</div>
+</div>
+<!-- 3-Column Linear Flow Canvas with Vibrant Highlights -->
+<div class="bg-white bg-grid-subtle border border-indigo-100 rounded-xl p-6 md:p-8 relative shadow-md shadow-indigo-100/40 overflow-hidden">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-cyan-200/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -bottom-20 w-64 h-64 bg-violet-200/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
+<!-- Step 01: Client Data Bus -->
+<div class="md:col-span-3 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between space-y-3 shadow-sm hover:border-cyan-400 transition-all">
+<div>
+<div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+<span class="text-[12px] font-bold text-slate-900 flex items-center gap-1.5 uppercase tracking-wide">
+<span class="w-6 h-6 rounded bg-cyan-100 flex items-center justify-center text-cyan-700">
+<span class="material-symbols-outlined text-[15px]" data-icon="devices">devices</span>
+</span>
+Step 01: Intake
+</span>
+<span class="font-telemetry-sm text-[10px] bg-cyan-50 text-cyan-700 border border-cyan-200 px-2 py-0.5 rounded font-bold">READY</span>
+</div>
+<div class="space-y-2 text-[12px] font-telemetry-sm text-slate-600">
+<div class="flex justify-between">
+<span class="text-slate-400">Client:</span>
+<span class="font-semibold text-slate-800">React 19 Vite</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-400">Data Bus:</span>
+<span class="font-bold text-cyan-600 bg-cyan-50 px-1.5 rounded">Socket.IO 4.7</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-400">Payload:</span>
+<span class="font-semibold text-slate-800">Deck PDF (10MB)</span>
+</div>
+</div>
+</div>
+<div class="p-2.5 bg-slate-900 text-cyan-300 rounded-lg text-[11px] font-telemetry-sm flex items-center space-x-2 border border-slate-800">
+<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_6px_#06b6d4]"></span>
+<span class="truncate font-mono">Emit: `start_diligence_stream`</span>
+</div>
+</div>
+<!-- Flow 1 Arrow with Electric Gradient -->
+<div class="md:col-span-1 flex flex-col items-center justify-center text-indigo-500 py-2 md:py-0">
+<span class="material-symbols-outlined text-[26px] rotate-90 md:rotate-0 text-cyan-500" data-icon="arrow_forward">arrow_forward</span>
+<span class="font-telemetry-sm text-[10px] text-cyan-600 font-bold bg-cyan-50 px-1.5 py-0.5 rounded mt-0.5">ws://</span>
+</div>
+<!-- Step 02: LangGraph Orchestrator (Vibrant Center Node) -->
+<div class="md:col-span-4 bg-white border-2 border-indigo-400/80 rounded-xl p-5 flex flex-col justify-between space-y-3 shadow-md shadow-indigo-100 relative">
+<div class="absolute -top-3 left-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-[10px] font-telemetry-sm font-bold uppercase tracking-wider px-2.5 py-0.5 rounded shadow-sm">
+Core Orchestrator
+</div>
+<div>
+<div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3 mt-1">
+<span class="text-[12px] font-bold text-slate-900 flex items-center gap-1.5 uppercase tracking-wide">
+<span class="w-6 h-6 rounded bg-indigo-100 flex items-center justify-center text-indigo-700">
+<span class="material-symbols-outlined text-[15px]" data-icon="account_tree">account_tree</span>
+</span>
+Step 02: LangGraph Engine
+</span>
+<span class="font-telemetry-sm text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> PARALLEL
+</span>
+</div>
+<div class="grid grid-cols-2 gap-2.5 text-[11px] font-telemetry-sm">
+<div class="bg-emerald-50/70 p-2.5 rounded-lg border border-emerald-200/80">
+<div class="text-emerald-700 font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="storage">storage</span> Chroma DB
+</div>
+<div class="text-emerald-900/60 text-[10px] truncate">1536-dim Cohere embed</div>
+<div class="text-slate-800 font-semibold mt-1">Grounded RAG</div>
+</div>
+<div class="bg-cyan-50/70 p-2.5 rounded-lg border border-cyan-200/80">
+<div class="text-cyan-700 font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="travel_explore">travel_explore</span> Tavily API
+</div>
+<div class="text-cyan-900/60 text-[10px] truncate">Depth: Advanced</div>
+<div class="text-slate-800 font-semibold mt-1">Live Web Scrape</div>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-100 pt-2 flex items-center justify-between text-[11px] font-telemetry-sm">
+<span class="text-slate-500 font-medium">Concurrent State Fan-Out:</span>
+<span class="text-indigo-600 font-extrabold bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">4 Workers Active</span>
+</div>
+</div>
+<!-- Flow 2 Arrow -->
+<div class="md:col-span-1 flex flex-col items-center justify-center text-violet-500 py-2 md:py-0">
+<span class="material-symbols-outlined text-[26px] rotate-90 md:rotate-0 text-violet-500" data-icon="fast_forward">fast_forward</span>
+<span class="font-telemetry-sm text-[10px] text-violet-600 font-bold bg-violet-50 px-1.5 py-0.5 rounded mt-0.5">sync</span>
+</div>
+<!-- Step 03: Synthesizer Node -->
+<div class="md:col-span-3 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between space-y-3 shadow-sm hover:border-violet-400 transition-all">
+<div>
+<div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+<span class="text-[12px] font-bold text-slate-900 flex items-center gap-1.5 uppercase tracking-wide">
+<span class="w-6 h-6 rounded bg-amber-100 flex items-center justify-center text-amber-700">
+<span class="material-symbols-outlined text-[15px]" data-icon="gavel">gavel</span>
+</span>
+Step 03: Synthesis
+</span>
+<span class="font-telemetry-sm text-[10px] bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold px-2 py-0.5 rounded shadow-2xs">CONVERGED</span>
+</div>
+<div class="space-y-1.5 text-[12px] font-telemetry-sm text-slate-700">
+<div class="flex items-center gap-1.5 text-emerald-700 font-medium"><span class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px]">✓</span> Contradiction Matrix Test</div>
+<div class="flex items-center gap-1.5 text-emerald-700 font-medium"><span class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px]">✓</span> Reconciled Conviction</div>
+<div class="flex items-center gap-1.5 text-emerald-700 font-medium"><span class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px]">✓</span> Red Flag Vectorization</div>
+<div class="text-indigo-600 font-bold pt-1 flex items-center gap-1">• 1-Click IC Memorandum</div>
+</div>
+</div>
+<div class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 px-3 py-1.5 rounded-lg text-center shadow-2xs">
+<span class="font-telemetry-sm text-[11px] font-extrabold text-emerald-700">VERDICT: 8.4 / 10 HIGH CONVICTION</span>
+</div>
+</div>
+</div>
+</div></section>
+<!-- FOUR AGENT SHOWCASE GRID -->
+<section class="space-y-6" id="warroom">
+<div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-3">
+<div>
+<div class="font-telemetry-sm text-[11px] font-bold text-[#2563eb] uppercase tracking-wider mb-1">Parallel Workforce // 4 Specialists</div>
+<h2 class="font-headline-lg text-2xl font-bold text-[#090d16]">Autonomous Research Agents</h2>
+</div>
+<p class="text-[13px] text-slate-500 mt-2 md:mt-0 font-telemetry-sm">
+          Powered by LLaMA 3.3-70B on Groq LPUs for sub-2 second token streaming.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"><!-- Agent 1: Market Analyst (Electric Cyan & Sky Blue) -->
+<div class="bg-white border-t-4 border-t-cyan-500 border-x border-b border-slate-200 rounded-xl p-5 flex flex-col justify-between space-y-4 shadow-sm hover:border-cyan-400 hover:shadow-cyan-100 hover:shadow-lg transition-all relative overflow-hidden group">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-md bg-cyan-50 border border-cyan-200 font-telemetry-sm text-[10px] font-bold text-cyan-700">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_6px_#06b6d4] animate-pulse"></span>
+<span>AGENT 01</span>
+</span>
+<span class="font-telemetry-sm text-[11px] font-bold text-cyan-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">GROQ / 70B</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-[17px] font-bold text-slate-900 flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center border border-cyan-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="query_stats">query_stats</span>
+</span>
+Market Analyst
+</h3>
+<p class="text-[13px] text-slate-600 mt-1 leading-snug">TAM, SAM, SOM validation paired with macroeconomic market timing indexes.</p>
+</div>
+<div class="bg-cyan-50/40 border border-cyan-100 rounded-lg p-3 font-telemetry-sm text-[11px] text-slate-700 space-y-1.5">
+<div class="text-cyan-700 font-bold flex items-center gap-1">&gt; Evaluating TAM claims...</div>
+<div class="truncate text-slate-800 font-medium">&gt; Pitch: $48B by 2028</div>
+<div class="truncate text-amber-700 font-semibold">&gt; Benchmark: $29.4B (Gartner)</div>
+<div class="pt-1 flex items-center space-x-1.5">
+<span class="bg-white px-2 py-0.5 rounded text-[10px] text-cyan-700 font-semibold border border-cyan-200 shadow-2xs">[chunk_088]</span>
+<span class="bg-white px-2 py-0.5 rounded text-[10px] text-cyan-700 font-semibold border border-cyan-200 shadow-2xs">[chunk_092]</span>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-100 pt-3 flex items-center justify-between font-telemetry-sm">
+<span class="text-[11px] font-bold text-slate-400 uppercase">Confidence</span>
+<span class="text-[12px] font-extrabold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded border border-cyan-200">94.2% HIGH</span>
+</div>
+</div>
+<!-- Agent 2: Competitor Scout (Electric Violet & Royal Purple) -->
+<div class="bg-white border-t-4 border-t-violet-600 border-x border-b border-slate-200 rounded-xl p-5 flex flex-col justify-between space-y-4 shadow-sm hover:border-violet-400 hover:shadow-violet-100 hover:shadow-lg transition-all relative overflow-hidden group">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-md bg-violet-50 border border-violet-200 font-telemetry-sm text-[10px] font-bold text-violet-700">
+<span class="w-1.5 h-1.5 rounded-full bg-violet-600 shadow-[0_0_6px_#8b5cf6] animate-pulse"></span>
+<span>AGENT 02</span>
+</span>
+<span class="font-telemetry-sm text-[11px] font-bold text-violet-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">GROQ / 70B</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-[17px] font-bold text-slate-900 flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-violet-50 text-violet-600 flex items-center justify-center border border-violet-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="radar">radar</span>
+</span>
+Competitor Scout
+</h3>
+<p class="text-[13px] text-slate-600 mt-1 leading-snug">Deep web crawling of indirect moats, patent portfolios, and stealth competitors.</p>
+</div>
+<div class="bg-violet-50/40 border border-violet-100 rounded-lg p-3 font-telemetry-sm text-[11px] text-slate-700 space-y-1.5">
+<div class="text-violet-700 font-bold">&gt; Scraping 14 live repos &amp; news...</div>
+<div class="truncate text-slate-800 font-medium">&gt; Overlap with Polygon ID detected</div>
+<div class="truncate text-emerald-700 font-semibold">&gt; Moat: Proprietary ZK-circuits</div>
+<div class="pt-1 flex items-center space-x-1.5">
+<span class="bg-white px-2 py-0.5 rounded text-[10px] text-violet-700 font-semibold border border-violet-200 shadow-2xs">[chunk_0312]</span>
+<span class="bg-white px-2 py-0.5 rounded text-[10px] text-violet-700 font-semibold border border-violet-200 shadow-2xs">[tavily_web]</span>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-100 pt-3 flex items-center justify-between font-telemetry-sm">
+<span class="text-[11px] font-bold text-slate-400 uppercase">Defensibility</span>
+<span class="text-[12px] font-extrabold text-violet-700 bg-violet-50 px-2 py-0.5 rounded border border-violet-200">88.7% STRONG</span>
+</div>
+</div>
+<!-- Agent 3: Financial Modeler (Neon Amber & Gold) -->
+<div class="bg-white border-t-4 border-t-amber-500 border-x border-b border-slate-200 rounded-xl p-5 flex flex-col justify-between space-y-4 shadow-sm hover:border-amber-400 hover:shadow-amber-100 hover:shadow-lg transition-all relative overflow-hidden group">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-md bg-amber-50 border border-amber-200 font-telemetry-sm text-[10px] font-bold text-amber-700">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_6px_#f59e0b] animate-pulse"></span>
+<span>AGENT 03</span>
+</span>
+<span class="font-telemetry-sm text-[11px] font-bold text-amber-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">GROQ / 70B</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-[17px] font-bold text-slate-900 flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="table_chart">table_chart</span>
+</span>
+Financial Modeler
+</h3>
+<p class="text-[13px] text-slate-600 mt-1 leading-snug">Stress-testing unit economics, LTV/CAC assumptions, and net cash runway.</p>
+</div>
+<div class="bg-amber-50/40 border border-amber-100 rounded-lg p-3 font-telemetry-sm text-[11px] text-slate-700 space-y-1.5">
+<div class="text-amber-700 font-bold">&gt; Parsing financial pro-forma...</div>
+<div class="truncate text-slate-800 font-medium">&gt; Gross Margin: 81.2% confirmed</div>
+<div class="truncate text-rose-600 font-bold">&gt; Warning: CAC understated 2.4x</div>
+<div class="pt-1 flex items-center space-x-1.5">
+<span class="bg-white px-2 py-0.5 rounded text-[10px] text-amber-800 font-semibold border border-amber-200 shadow-2xs">[chunk_0411]</span>
+<span class="bg-rose-50 px-2 py-0.5 rounded text-[10px] text-rose-600 font-bold border border-rose-200 shadow-2xs">[discrepancy]</span>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-100 pt-3 flex items-center justify-between font-telemetry-sm">
+<span class="text-[11px] font-bold text-slate-400 uppercase">Sustainability</span>
+<span class="text-[12px] font-extrabold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">71.0% MODERATE</span>
+</div>
+</div>
+<!-- Agent 4: Risk Assessor (Vivid Emerald & Mint) -->
+<div class="bg-white border-t-4 border-t-emerald-500 border-x border-b border-slate-200 rounded-xl p-5 flex flex-col justify-between space-y-4 shadow-sm hover:border-emerald-400 hover:shadow-emerald-100 hover:shadow-lg transition-all relative overflow-hidden group">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-200 font-telemetry-sm text-[10px] font-bold text-emerald-700">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981] animate-pulse"></span>
+<span>AGENT 04</span>
+</span>
+<span class="font-telemetry-sm text-[11px] font-bold text-emerald-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">GROQ / 70B</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-[17px] font-bold text-slate-900 flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="shield">shield</span>
+</span>
+Risk Assessor
+</h3>
+<p class="text-[13px] text-slate-600 mt-1 leading-snug">Regulatory compliance, SEC/GDPR exposure, key-person dependencies, and churn.</p>
+</div>
+<div class="bg-emerald-50/40 border border-emerald-100 rounded-lg p-3 font-telemetry-sm text-[11px] text-slate-700 space-y-1.5">
+<div class="text-emerald-700 font-bold">&gt; Regulatory threat analysis...</div>
+<div class="truncate text-slate-800 font-medium">&gt; MiCA Tier-2 non-custodial compliant</div>
+<div class="truncate text-emerald-800 font-semibold">&gt; Key-person: 2 co-founders locked</div>
+<div class="pt-1 flex items-center space-x-1.5">
+<span class="bg-white px-2 py-0.5 rounded text-[10px] text-emerald-700 font-semibold border border-emerald-200 shadow-2xs">[chunk_0519]</span>
+<span class="bg-white px-2 py-0.5 rounded text-[10px] text-emerald-700 font-semibold border border-emerald-200 shadow-2xs">[chunk_0524]</span>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-100 pt-3 flex items-center justify-between font-telemetry-sm">
+<span class="text-[11px] font-bold text-slate-400 uppercase">Risk Index</span>
+<span class="text-[12px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">LOW RISK (2.1/10)</span>
+</div>
+</div></div>
+</section>
+<!-- LIVE CASE PREVIEW (Institutional Dossier Preview: XID Protocol) -->
+<section class="space-y-4" id="live-case"><div class="flex items-center justify-between border-b border-slate-200 pb-3">
+<div>
+<div class="font-telemetry-sm text-[11px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-violet-600 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-violet-600"></span> Real-Time Inference Dossier
+</div>
+<h2 class="font-headline-lg text-2xl font-bold text-slate-900 tracking-tight">Live Case Preview</h2>
+</div>
+<div class="flex items-center space-x-2">
+<button class="px-3.5 py-1.5 bg-white hover:bg-rose-50 border border-slate-300 hover:border-rose-300 rounded-lg text-slate-700 hover:text-rose-700 text-[12px] font-bold inline-flex items-center space-x-1.5 shadow-2xs transition-colors">
+<span class="material-symbols-outlined text-[17px] text-rose-600" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span>Export IC Memo PDF</span>
+</button>
+</div>
+</div>
+<!-- Dossier Container with Iridescent Card Glow -->
+<div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-md shadow-slate-100 relative overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Col: Case Identity & Conviction Score Gauge -->
+<div class="lg:col-span-4 flex flex-col justify-between space-y-6 border-b lg:border-b-0 lg:border-r border-slate-200 pb-6 lg:pb-0 lg:pr-8">
+<div class="space-y-5">
+<div class="flex items-center space-x-3.5">
+<div class="w-13 h-13 p-3 rounded-xl bg-gradient-to-tr from-slate-900 via-indigo-950 to-slate-900 text-cyan-400 flex items-center justify-center font-headline-lg font-extrabold text-xl shadow-md border border-cyan-500/20">
+                  XID
+                </div>
+<div>
+<div class="flex items-center space-x-2">
+<h3 class="font-headline-sm text-[19px] font-extrabold text-slate-900">XID Protocol</h3>
+<span class="bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-700 text-[10px] font-telemetry-sm font-extrabold px-2.5 py-0.5 rounded-full border border-cyan-200 shadow-2xs">SERIES A</span>
+</div>
+<p class="text-[13px] text-slate-500 font-medium">Decentralized Identity with Zero-Knowledge Proofs</p>
+</div>
+</div>
+<!-- Conviction Gauge Block with Vibrant Gradient Bar -->
+<div class="bg-gradient-to-b from-slate-50 to-indigo-50/30 border border-indigo-100 rounded-xl p-5 space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-telemetry-sm text-[11px] font-bold text-slate-500 uppercase tracking-wider">Synthesized Conviction</span>
+<span class="font-telemetry-sm text-[10px] font-extrabold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-300 uppercase shadow-2xs">
+                    High Conviction
+                  </span>
+</div>
+<div class="flex items-baseline space-x-2">
+<span class="font-headline-lg text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600">8.4</span>
+<span class="font-telemetry-sm text-slate-400 font-bold text-lg">/ 10.0</span>
+</div>
+<div class="w-full bg-slate-200/80 h-2.5 rounded-full overflow-hidden p-0.5">
+<div class="bg-gradient-to-r from-cyan-500 via-emerald-500 to-teal-500 h-full rounded-full shadow-[0_0_8px_#10b981]" style="width: 84%"></div>
+</div>
+<div class="flex justify-between text-[11px] font-telemetry-sm text-slate-500 pt-0.5 font-medium">
+<span class="text-cyan-700 font-semibold">Confidence: 96.8%</span>
+<span class="text-emerald-700 font-semibold">4/4 Consensus</span>
+</div>
+</div>
+<!-- Metadata List with Colored Accents -->
+<div class="space-y-2.5 text-[12px] font-telemetry-sm">
+<div class="flex justify-between py-2 border-b border-slate-100">
+<span class="text-slate-400 font-medium">Target Raise:</span>
+<span class="text-slate-900 font-bold">$12.5M at $65M Post</span>
+</div>
+<div class="flex justify-between py-2 border-b border-slate-100">
+<span class="text-slate-400 font-medium">Lead Syndicate:</span>
+<span class="text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded">Vanguard Apex Guild</span>
+</div>
+<div class="flex justify-between py-1.5">
+<span class="text-slate-400 font-medium">Vector Chunks Analyzed:</span>
+<span class="text-cyan-700 font-bold">384 chunks (Chroma RAG)</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-slate-900 hover:bg-slate-800 text-cyan-300 text-[12px] font-bold font-telemetry-sm py-3 rounded-lg transition-all flex items-center justify-center space-x-2 border border-slate-800 shadow-sm">
+<span class="material-symbols-outlined text-[17px] text-cyan-400" data-icon="data_object">data_object</span>
+<span>Inspect Raw JSON Ledger [Telemetry]</span>
+</button>
+</div>
+<!-- Right Col: Cross-Agent Contradiction & Reconciled Synthesis -->
+<div class="lg:col-span-8 space-y-4">
+<div>
+<div class="font-telemetry-sm text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Synthesis Reconciliation // Agents 01 to 04</div>
+<h4 class="font-headline-sm text-lg font-bold text-slate-900">Key Findings &amp; Contradiction Resolution</h4>
+</div>
+<!-- Agreement Card with Emerald Accent -->
+<div class="border-l-4 border-l-emerald-500 bg-white border border-slate-200 p-4 rounded-r-xl shadow-sm space-y-2 hover:border-emerald-200 transition-all">
+<div class="flex items-center justify-between">
+<span class="font-telemetry-sm text-[11px] font-bold text-emerald-700 flex items-center gap-1.5 uppercase">
+<span class="material-symbols-outlined text-[17px] text-emerald-600" data-icon="check_circle">check_circle</span>
+                  Unanimous Consensus: Enterprise Moat &amp; Architecture
+                </span>
+<span class="font-telemetry-sm text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded font-bold">AGENTS 01, 02, 04</span>
+</div>
+<p class="text-[13px] text-slate-700 leading-relaxed">
+                XID’s zero-knowledge recursive proofs reduce verification gas costs by <span class="font-bold text-emerald-700 bg-emerald-50 px-1 rounded">84%</span> compared to Worldcoin / Polygon ID, creating massive technical lock-in with Tier-1 banking partners.
+              </p>
+<div class="flex flex-wrap items-center gap-2 pt-1 font-telemetry-sm text-[10px] text-slate-500">
+<span class="font-bold text-slate-400">Citations:</span>
+<span class="bg-cyan-50 text-cyan-700 px-2 py-0.5 rounded border border-cyan-200 font-semibold">[chunk_0142: whitepaper_v3.pdf]</span>
+<span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded border border-indigo-200 font-semibold">[chunk_0289: audit_trail.pdf]</span>
+</div>
+</div>
+<!-- Contradiction & Resolution Card with Sunset Rose/Amber Accent -->
+<div class="border-l-4 border-l-rose-500 bg-white border border-slate-200 p-4 rounded-r-xl shadow-sm space-y-2 hover:border-rose-200 transition-all">
+<div class="flex items-center justify-between">
+<span class="font-telemetry-sm text-[11px] font-bold text-rose-600 flex items-center gap-1.5 uppercase">
+<span class="material-symbols-outlined text-[17px] text-rose-600" data-icon="warning">warning</span>
+                  Resolved Contradiction: Runway Under-Reporting
+                </span>
+<span class="font-telemetry-sm text-[10px] font-extrabold bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-200 uppercase">RECONCILED</span>
+</div>
+<p class="text-[13px] text-slate-700 leading-relaxed">
+<span class="text-rose-600 font-bold">Contradiction:</span> Pitch deck states 24-month runway. 
+                <span class="text-indigo-600 font-bold bg-indigo-50 px-1 rounded">Agent 03 (Financial)</span> flagged cloud RPC compute overhead scaling quadratically, shrinking effective runway to 13.8 months without additional capital.
+              </p>
+<div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-[12px] font-telemetry-sm text-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+<span class="font-medium">Synthesizer Resolution: Condition term sheet on milestone-based tranche disbursement.</span>
+<span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-extrabold whitespace-nowrap">ACTIONABLE</span>
+</div>
+</div>
+<!-- Executive IC Takeaway Box with Violet Glow -->
+<div class="bg-gradient-to-r from-slate-50 to-indigo-50/40 border border-indigo-200/80 p-4 rounded-xl space-y-2 shadow-2xs">
+<div class="flex items-center justify-between">
+<span class="font-telemetry-sm text-[11px] font-bold text-indigo-900 uppercase tracking-wide flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-indigo-600" data-icon="format_quote">format_quote</span> Investment Committee Memo Snippet
+</span>
+<span class="font-telemetry-sm text-[10px] text-slate-400 font-medium">TIMESTAMP: 2025-05-14T08:32:00Z</span>
+</div>
+<p class="font-telemetry-sm text-[12px] text-slate-700 leading-relaxed italic">
+                "Recommend syndicate lead commitment up to $2.5M. The technical differentiation is defensible and validated by Tavily competitive scraping. Require board observer seat and quarterly audit on compute expenditure."
+              </p>
+</div>
+</div>
+</div>
+</div></section>
+<!-- SOCIAL PROOF & SYNDICATE NETWORK TICKER -->
+<section class="space-y-4 pt-4">
+<div class="text-center space-y-1">
+<div class="font-telemetry-sm text-[11px] font-bold text-slate-500 uppercase tracking-wider">Deployed Across Top-Tier Institutional Capital</div>
+<div class="text-sm text-slate-500">Over $1.4B in aggregate venture deal flow processed through Pitchvane multi-agent pipelines</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-3 pt-2">
+<div class="bg-white border border-slate-200 rounded-md py-3.5 px-4 flex items-center justify-center space-x-2 text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all">
+<span class="material-symbols-outlined text-[18px] text-slate-500" data-icon="token">token</span>
+<span class="font-headline-sm text-[12px] font-bold tracking-wider">NEXUS VENTURES</span>
+</div>
+<div class="bg-white border border-slate-200 rounded-md py-3.5 px-4 flex items-center justify-center space-x-2 text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all">
+<span class="material-symbols-outlined text-[18px] text-slate-500" data-icon="diamond">diamond</span>
+<span class="font-headline-sm text-[12px] font-bold tracking-wider">APEX SYNDICATE</span>
+</div>
+<div class="bg-white border border-slate-200 rounded-md py-3.5 px-4 flex items-center justify-center space-x-2 text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all">
+<span class="material-symbols-outlined text-[18px] text-slate-500" data-icon="deployed_code">deployed_code</span>
+<span class="font-headline-sm text-[12px] font-bold tracking-wider">CYPHER CAPITAL</span>
+</div>
+<div class="bg-white border border-slate-200 rounded-md py-3.5 px-4 flex items-center justify-center space-x-2 text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all">
+<span class="material-symbols-outlined text-[18px] text-slate-500" data-icon="account_balance">account_balance</span>
+<span class="font-headline-sm text-[12px] font-bold tracking-wider">FOUNDRY ALLIANCE</span>
+</div>
+<div class="col-span-2 md:col-span-1 bg-white border border-slate-200 rounded-md py-3.5 px-4 flex items-center justify-center space-x-2 text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all">
+<span class="material-symbols-outlined text-[18px] text-slate-500" data-icon="layers">layers</span>
+<span class="font-headline-sm text-[12px] font-bold tracking-wider">PARALLEL FUND</span>
+</div>
+</div>
+</section>
+<!-- CALL TO ACTION BANNER -->
+<section class="bg-white border border-slate-200 rounded-xl p-8 md:p-10 text-center space-y-6 shadow-sm" id="demo"><div class="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-indigo-500/5 to-violet-500/5 pointer-events-none rounded-2xl"></div>
+<div class="relative z-10 max-w-2xl mx-auto space-y-3">
+<span class="font-telemetry-sm text-[11px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-indigo-600 to-violet-600 uppercase tracking-wider">
+Unparalleled Decision Velocity
+</span>
+<h2 class="font-headline-lg text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+Accelerate Your Investment Committee
+</h2>
+<p class="text-base text-slate-600 leading-relaxed">
+Stop waiting 3 weeks for associate spreadsheets. Upload pitch decks, financials, and whitepapers to receive a fully synthesized conviction memorandum in 120 seconds.
+</p>
+</div>
+<div class="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-2.5 max-w-md mx-auto">
+<input class="bg-white border-2 border-indigo-100 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 w-full shadow-2xs" placeholder="partner@fundname.vc" type="email"/>
+<button class="w-full sm:w-auto btn-gradient-glow text-white font-bold text-[13px] px-6 py-3 rounded-lg transition-all shadow-md whitespace-nowrap uppercase tracking-wider flex items-center justify-center gap-1.5">
+<span>Request Partner Access</span>
+<span class="material-symbols-outlined text-[17px] text-cyan-200" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="relative z-10 font-telemetry-sm text-[11px] text-slate-500 flex items-center justify-center gap-2 flex-wrap">
+<span class="text-emerald-600 font-semibold">• SOC2 Type II Certified</span>
+<span class="text-cyan-600 font-semibold">• Isolated Private Vector Stores</span>
+<span class="text-violet-600 font-semibold">• Zero LLM Retention</span>
+</div></section>
+</main>
+<!-- Technical Institutional Footer -->
+<footer class="relative z-10 bg-white border-t border-slate-200 mt-16">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-6 py-6 max-w-7xl mx-auto gap-4">
+<div class="flex flex-col space-y-1 text-center md:text-left">
+<div class="flex items-center justify-center md:justify-start space-x-2">
+<span class="material-symbols-outlined text-[#090d16] text-[18px]" data-icon="hub">hub</span>
+<span class="font-headline-sm text-base font-bold text-slate-900">Pitchvane</span>
+</div>
+<p class="text-[12px] text-slate-500 max-w-xl">
+          © 2025 Pitchvane Intelligence Corp. All multi-agent inference streams are grounded via Chroma RAG and Tavily Search.
+        </p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-4 text-[12px] font-telemetry-sm text-slate-600">
+<a class="hover:text-slate-900 transition-colors" href="#compliance">Security &amp; Compliance</a>
+<a class="hover:text-slate-900 transition-colors" href="#vector">Chroma Vector Topology</a>
+<a class="hover:text-slate-900 transition-colors" href="#orchestration">LangGraph Orchestration</a>
+<a class="text-[#059669] font-medium flex items-center gap-1 hover:underline" href="#status">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+          API Status: Operational
+        </a>
+<a class="hover:text-slate-900 transition-colors" href="#audit">Audit Logs</a>
+</div>
+</div>
+</footer>
+</body></html>
