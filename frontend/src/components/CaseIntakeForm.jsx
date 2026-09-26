@@ -129,7 +129,7 @@ export function CaseIntakeForm({ onSubmit, loading }) {
     const text = textToSend.trim();
     if (!text && attachedFiles.length === 0) return;
 
-    const userMsgId = `user-${Date.now()}`;
+    const userMsgId = `user-${crypto.randomUUID()}`;
     const newMsg = {
       id: userMsgId,
       sender: 'user',
@@ -151,7 +151,7 @@ export function CaseIntakeForm({ onSubmit, loading }) {
       setMessages((prev) => [
         ...prev,
         {
-          id: `bot-${Date.now()}`,
+          id: `bot-${crypto.randomUUID()}`,
           sender: 'bot',
           text: isPitchText
             ? `✅ **Case Intake Configured!**\n\nI've parsed the startup details (${text.slice(0, 80)}...). All 4 specialist agents are standing by on live data stream. Click **"Launch Live Diligence"** below or in the input bar to begin the parallel synthesis.`
