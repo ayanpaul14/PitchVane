@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
+import { API_BASE_URL } from '../config';
 
-const SOCKET_URL = 'http://localhost:5000';
+const SOCKET_URL = API_BASE_URL;
 
 export function useCaseSocket(caseId) {
   const [isConnected, setIsConnected] = useState(false);

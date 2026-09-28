@@ -13,6 +13,7 @@ import { useCaseSocket } from './hooks/useCaseSocket.js';
 import { useAuth } from './context/AuthContext.jsx';
 import { useTheme } from './context/ThemeContext.jsx';
 import { Loader2 } from 'lucide-react';
+import { API_BASE_URL } from './config';
 
 export default function App() {
   const { isAuthenticated, isLoading, token } = useAuth();
@@ -115,7 +116,7 @@ export default function App() {
       const headers = { 'Content-Type': 'application/json' };
       if (token) headers['Authorization'] = `Bearer ${token}`;
 
-      const response = await fetch('http://localhost:5000/api/cases', {
+      const response = await fetch(`${API_BASE_URL}/api/cases`, {
         method: 'POST',
         headers,
         body: JSON.stringify({ idea }),
@@ -126,7 +127,7 @@ export default function App() {
       setCaseId(data.caseId);
     } catch (err) {
       console.error('Failed to initiate case:', err);
-      setFetchError(err.message || 'Could not connect to backend server at http://localhost:5000');
+      setFetchError(err.message || `Could not connect to backend server at ${API_BASE_URL}`);
     } finally {
       setLoading(false);
     }

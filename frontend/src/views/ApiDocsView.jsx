@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import { API_BASE_URL } from '../config';
 
 const CODE_EXAMPLES = {
   javascript: `// Initialize Socket.io client
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:5000');
+const socket = io('${API_BASE_URL}');
 
 // 1. Submit pitch for autonomous due diligence
-const response = await fetch('http://localhost:5000/api/cases', {
+const response = await fetch('${API_BASE_URL}/api/cases', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -31,10 +32,10 @@ socket.on('report:ready', ({ verdict }) => {
 import socketio
 
 sio = socketio.Client()
-sio.connect('http://localhost:5000')
+sio.connect('${API_BASE_URL}')
 
 # 1. Initiate case run
-res = requests.post('http://localhost:5000/api/cases', json={
+res = requests.post('${API_BASE_URL}/api/cases', json={
     'idea': 'Decentralized ZK-identity verification for Tier-1 banks.'
 })
 case_id = res.json()['caseId']
@@ -50,12 +51,12 @@ def on_agent_done(data):
 def on_report_ready(data):
     print("Synthesized Verdict:", data['verdict'])`,
   curl: `# 1. Create a due diligence case
-curl -X POST http://localhost:5000/api/cases \\
+curl -X POST ${API_BASE_URL}/api/cases \\
   -H "Content-Type: application/json" \\
   -d '{"idea":"Decentralized ZK-identity verification for Tier-1 banks."}'
 
 # 2. Query case report status (Polling Fallback)
-curl http://localhost:5000/api/cases/67634f19bc32a90014b2d184/report`,
+curl ${API_BASE_URL}/api/cases/67634f19bc32a90014b2d184/report`,
 };
 
 export function ApiDocsView() {
@@ -84,7 +85,7 @@ export function ApiDocsView() {
           </span>
         </div>
         <div className="mt-3 md:mt-0 font-telemetry-sm text-xs bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800 font-bold">
-          Base URL: http://localhost:5000
+          Base URL: {API_BASE_URL}
         </div>
       </div>
 

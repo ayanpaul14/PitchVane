@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 
 const AuthContext = createContext(null);
 
@@ -40,7 +41,7 @@ export function AuthProvider({ children, googleEnabled = false }) {
     const savedToken = localStorage.getItem(TOKEN_KEY);
     if (!savedToken) return;
 
-    fetch('http://localhost:5000/api/auth/me', {
+    fetch(`${API_BASE_URL}/api/auth/me`, {
       headers: {
         Authorization: `Bearer ${savedToken}`,
       },
@@ -75,7 +76,7 @@ export function AuthProvider({ children, googleEnabled = false }) {
   // Sign In with Email & Password
   const login = async (email, password) => {
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -97,7 +98,7 @@ export function AuthProvider({ children, googleEnabled = false }) {
   // Register New Account
   const register = async ({ name, email, password, organization, role }) => {
     try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password, organization, role }),
@@ -122,7 +123,7 @@ export function AuthProvider({ children, googleEnabled = false }) {
       const credential = credentialResponse.credential;
       if (!credential) throw new Error('Missing Google credential token.');
 
-      const res = await fetch('http://localhost:5000/api/auth/google', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ credential }),

@@ -6,6 +6,7 @@ import {
   Clock, TrendingUp, AlertCircle, CheckCircle, Loader2, History,
   ChevronRight,
 } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const ROLES = [
   'General Partner',
@@ -15,7 +16,7 @@ const ROLES = [
   'Limited Partner',
 ];
 
-const API = 'http://localhost:5000/api';
+const API = `${API_BASE_URL}/api`;
 
 function timeAgo(dateStr) {
   const now = Date.now();
