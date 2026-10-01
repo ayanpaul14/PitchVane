@@ -21,6 +21,7 @@ export const CaseStore = {
     const id = 'case_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
     const newRecord = {
       _id: id,
+      userId: data.userId || null,
       idea: data.idea,
       status: 'pending',
       findings: {
@@ -73,17 +74,20 @@ export const CaseStore = {
     return memoryStore.get(id) || null;
   },
 
-  async findAllCases({ limit = 50 } = {}) {
+  async findAllCases({ limit = 50, userId = null } = {}) {
     if (mongoose.connection.readyState === 1) {
       try {
-        const docs = await Case.find({}).sort({ createdAt: -1 }).limit(limit).lean();
+        // If userId provided, filter by it; otherwise return all (for admin/fallback)
+        const query = userId ? { userId } : {};
+        const docs = await Case.find(query).sort({ createdAt: -1 }).limit(limit).lean();
         return docs;
       } catch (err) {
         console.warn('[CaseStore] MongoDB findAll failed, using memory cache:', err.message);
       }
     }
-    // In-memory fallback: return all stored cases sorted by createdAt desc
-    const all = Array.from(memoryStore.values());
+    // In-memory fallback: filter by userId if provided
+    let all = Array.from(memoryStore.values());
+    if (userId) all = all.filter((c) => c.userId === userId);
     all.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     return all.slice(0, limit);
   },

@@ -13,6 +13,7 @@ const FindingSubSchema = new mongoose.Schema(
 
 const CaseSchema = new mongoose.Schema(
   {
+    userId: { type: String, default: null, index: true }, // tracks which user ran this analysis
     idea: { type: String, required: true },
     status: {
       type: String,
