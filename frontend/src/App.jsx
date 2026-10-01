@@ -24,6 +24,8 @@ export default function App() {
   const [selectedDeal, setSelectedDeal] = useState(null);
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
+  // Bumped each time a new analysis completes — forces ProfileView to refetch
+  const [profileRefreshKey, setProfileRefreshKey] = useState(0);
 
   // Completed analyses stored for DealFlow pipeline with localStorage persistence
   const [completedCases, setCompletedCases] = useState(() => {
@@ -89,6 +91,8 @@ export default function App() {
     setCompletedCases((prev) => [newCase, ...prev.filter((c) => c.id !== caseId)]);
     setRegisteredCaseIds((prev) => new Set([...prev, caseId]));
     setSelectedDeal(newCase);
+    // Trigger Profile to refetch analysis history
+    setProfileRefreshKey((k) => k + 1);
   }
 
   const handleTabChange = (tabId) => {
@@ -247,7 +251,7 @@ export default function App() {
           )}
 
           {activeTab === 'profile' && (
-            <ProfileView onNavigate={handleTabChange} />
+            <ProfileView onNavigate={handleTabChange} refreshKey={profileRefreshKey} />
           )}
         </main>
       )}

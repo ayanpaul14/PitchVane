@@ -48,7 +48,7 @@ function StatusBadge({ status }) {
   );
 }
 
-export function ProfileView({ onNavigate }) {
+export function ProfileView({ onNavigate, refreshKey = 0 }) {
   const { user, token, logout } = useAuth();
 
   const [editing, setEditing] = useState(false);
@@ -95,7 +95,7 @@ export function ProfileView({ onNavigate }) {
     }
     fetchHistory();
     return () => { cancelled = true; };
-  }, [token]);
+  }, [token, refreshKey]);
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -350,10 +350,39 @@ export function ProfileView({ onNavigate }) {
               <h4 className="font-headline-md text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2 mb-4">
                 <History className="w-4 h-4 text-orange-500" />
                 Recent Analyses
-                {!loadingHistory && cases.length > 0 && (
-                  <span className="ml-auto text-[10px] font-bold text-slate-400 dark:text-slate-500">{cases.length} record{cases.length !== 1 ? 's' : ''}</span>
-                )}
+                <span className="ml-auto flex items-center gap-1.5">
+                  {!loadingHistory && cases.length > 0 && (
+                    <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">{cases.length} record{cases.length !== 1 ? 's' : ''}</span>
+                  )}
+                  <button
+                    type="button"
+                    title="Refresh history"
+                    className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 text-slate-400 hover:text-indigo-500 dark:hover:text-cyan-400 transition-all cursor-pointer"
+                    style={{ lineHeight: 0 }}
+                    onClick={() => {
+                      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+                      setLoadingHistory(true);
+                      setHistoryError(null);
+                      Promise.all([
+                        fetch(`${API}/cases?limit=20`, { headers }),
+                        fetch(`${API}/cases/stats`, { headers }),
+                      ]).then(async ([casesRes, statsRes]) => {
+                        if (casesRes.ok) setCases((await casesRes.json()).cases || []);
+                        if (statsRes.ok) setStats(await statsRes.json());
+                      }).catch(() => setHistoryError('Could not reach the backend.'))
+                        .finally(() => setLoadingHistory(false));
+                    }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+                      <path d="M21 3v5h-5" />
+                      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+                      <path d="M8 16H3v5" />
+                    </svg>
+                  </button>
+                </span>
               </h4>
+
 
               {/* Loading */}
               {loadingHistory && (
